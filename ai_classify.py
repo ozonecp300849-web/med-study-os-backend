@@ -6,16 +6,10 @@ couldn't handle. Returns classifications with confidence scores.
 """
 import json
 import os
-import sys
 import urllib.request
 from typing import Any
 
-BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(BACKEND_DIR)
-EXAM_DIR = os.path.join(ROOT, "Exam classifier")
-sys.path.insert(0, os.path.join(EXAM_DIR, "tool"))
-
-from lectures import LECTURE_TITLE, LECTURE_ORDER  # type: ignore
+from lectures import LECTURE_TITLE, LECTURE_ORDER
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 FREE_MODEL = "google/gemma-4-26b-a4b-it:free"

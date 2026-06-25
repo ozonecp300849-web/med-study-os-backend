@@ -27,6 +27,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from ai_classify import classify_with_ai
+from lectures import LECTURE_TITLE, LECTURE_ORDER, UNCLASSIFIED
 
 BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(BACKEND_DIR)  # ...\Med guide
@@ -34,13 +35,6 @@ ROOT = os.path.dirname(BACKEND_DIR)  # ...\Med guide
 EXAM_DIR = os.path.join(ROOT, "Exam classifier")
 EXAM_WORK = os.path.join(EXAM_DIR, "work")
 RESLIDE_PROJECTS = os.path.join(ROOT, "concluder", "projects")
-
-# Import the authoritative lecture list straight from the tool (single source of truth)
-sys.path.insert(0, os.path.join(EXAM_DIR, "tool"))
-try:
-    from lectures import LECTURE_TITLE, LECTURE_ORDER, UNCLASSIFIED  # type: ignore
-except Exception:  # pragma: no cover - tool not present
-    LECTURE_TITLE, LECTURE_ORDER, UNCLASSIFIED = {}, {}, ("UNCLASSIFIED", "Unclassified")
 
 PHARMA_START = LECTURE_ORDER.get("L18", 16)
 ACCENTS = ["teal", "emerald", "sky", "amber", "rose"]

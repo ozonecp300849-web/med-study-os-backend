@@ -23,7 +23,7 @@ from dotenv import load_dotenv
 
 load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Body
 from fastapi.middleware.cors import CORSMiddleware
 
 from ai_classify import classify_with_ai
@@ -243,7 +243,7 @@ def lecture_synthesizer():
 
 
 @app.post("/api/ai-classify")
-def ai_classify_endpoint(payload: dict):
+def ai_classify_endpoint(payload: dict = Body(...)):
     api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
         return {"error": "OPENROUTER_API_KEY not configured. Get free key at https://openrouter.ai/keys", "classifications": []}
